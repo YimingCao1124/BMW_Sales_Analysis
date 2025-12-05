@@ -1,0 +1,165 @@
+---
+title: "Data Cleaning"
+author: "Yilin Cai"
+date: "2025-12-05"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Data Cleaning
+```{r}
+
+library(tidyverse)
+library(janitor)
+
+
+bmw_raw <- read_csv("data/BMW sales data (2010-2024).csv")
+
+view(bmw_raw)
+
+
+
+```
+
+```{r}
+## ----clean-basic------------------------------------------------------------
+bmw_clean <- bmw_raw |>
+  # make names snake_case
+  clean_names() |>
+  # trim whitespace and standardize text variables
+  mutate(
+    model         = str_squish(model),
+    region        = str_squish(region),
+    color         = str_squish(color),
+    fuel_type     = str_squish(fuel_type),
+    transmission  = str_squish(transmission),
+    sales_classification = str_squish(sales_classification),
+
+    # standardize capitalization
+    region       = str_to_title(region),
+    color        = str_to_title(color),
+    fuel_type    = str_to_title(fuel_type),
+    transmission = str_to_title(transmission),
+
+    # make sales_classification an ordered factor (Low < Medium < High)
+    sales_classification = fct_relevel(
+      factor(str_to_title(sales_classification)),
+      "Low", "Medium", "High"
+    )
+  )
+
+
+
+```
+
+```{r}
+# Count NAs in each variable
+bmw_clean |>
+  summarize(across(everything(), \(x) sum(is.na(x)))) |>
+  pivot_longer(everything(),
+               names_to = "variable",
+               values_to = "n_missing") |>
+  arrange(desc(n_missing))
+
+
+
+```
+```{r}
+view(bmw_clean)
+
+```
+
+For data cleaning, I mainly standardized the column names, cleaned up messy text fields (like region, model, fuel type), and fixed capitalization so everything is consistent. I also checked for missing values and make sure there are no NAs. 
+
+
+```{r}
+
+
+
+##    Summarize total yearly sales by region
+## ---------------------------------------------------------
+bmw_yearly <- bmw_clean |>
+  group_by(region, year) |>
+  summarize(
+    total_sales    = sum(sales_volume, na.rm = TRUE),
+    avg_price      = mean(price_usd, na.rm = TRUE),
+    .groups = "drop"
+  ) |>
+  arrange(region, year)
+
+
+bmw_yearly <- bmw_yearly |>
+  group_by(region) |>
+  arrange(year, .by_group = TRUE) |>
+  mutate(
+    sales_lag        = lag(total_sales),
+    sales_growth_abs = total_sales - sales_lag,
+    sales_growth_pct = 100 * (total_sales / sales_lag - 1)
+  ) |>
+  ungroup()
+
+bmw_yearly_clean <- bmw_yearly |>
+  drop_na(sales_lag, sales_growth_abs, sales_growth_pct)
+view(bmw_yearly_clean)
+
+write_csv(bmw_clean, "data/bmw_clean.csv")
+write_csv(bmw_yearly_clean, "data/bmw_yearly_clean.csv")
+
+
+```
+
+For this part, I summed up the total BMW sales for each region and each year, and also calculated the average price. Then I looked at how sales changed over time by creating a “lagged” sales value and calculating both the absolute and percentage growth from the previous year. After that, I removed the first-year rows (since they don’t have a previous year to compare to). Now we have a clean table that shows sales trends and growth for every region across the years.
+
+
+Variable	Meaning: 
+total_sales: Total BMW cars sold in each region × year
+sales_lag: Previous year’s total sales (used to compute growth)
+sales_growth_abs: Absolute growth (units sold difference)
+sales_growth_pct: % growth rate year-over-year
+
+
+```{r}
+library(plotly)
+
+p <- ggplot(bmw_yearly, aes(x = year, y = total_sales, color = region)) +
+  geom_line(size = 1) +
+  labs(
+    title = "BMW Total Yearly Sales by Region",
+    x = "Year",
+    y = "Total Sales (Units)"
+  ) +
+  theme_minimal()
+
+ggplotly(p)
+
+
+```
+```{r}
+
+library(scales)
+
+p <- ggplot(bmw_model_global_top10,
+            aes(x = reorder(model, total_sales), y = total_sales)) +
+  geom_col(fill = "#2C7FB8", width = 0.7) +
+  coord_flip() +
+  scale_y_continuous(labels = comma) +
+  labs(
+    title = "Top 10 BMW Models by Global Sales",
+    subtitle = "Hover to explore model sales (2010–2024)",
+    x = "Model",
+    y = "Total Sales (Units)"
+  ) +
+  theme_minimal(base_size = 13)
+
+ggplotly(p, tooltip = c("x", "y"))
+
+
+
+```
+
+`
+
+

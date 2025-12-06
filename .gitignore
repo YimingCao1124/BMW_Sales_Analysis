@@ -1,4 +1,15 @@
-.Rproj.user
+# macOS
+.DS_Store
+
+# R
 .Rhistory
 .RData
-.Ruserdata
+.Rproj.user
+*.Rproj
+
+# Backup files
+*.backup
+
+# Temporary files
+/tmp/
+*.tmp

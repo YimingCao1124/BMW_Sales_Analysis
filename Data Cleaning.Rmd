@@ -1,8 +1,8 @@
 ---
 title: "Data Cleaning"
-author: "Yilin Cai"
-date: "2025-12-05"
-output: html_document
+output:
+  html_document:
+    self_contained: false
 ---
 
 ```{r setup, include=FALSE}
@@ -141,6 +141,13 @@ ggplotly(p)
 
 library(scales)
 
+# Create top 10 models dataset
+bmw_model_global_top10 <- bmw_clean %>%
+  group_by(model) %>%
+  summarize(total_sales = sum(sales_volume)) %>%
+  arrange(desc(total_sales)) %>%
+  head(10)
+
 p <- ggplot(bmw_model_global_top10,
             aes(x = reorder(model, total_sales), y = total_sales)) +
   geom_col(fill = "#2C7FB8", width = 0.7) +
@@ -163,3 +170,58 @@ ggplotly(p, tooltip = c("x", "y"))
 `
 
 
+
+<style>
+#code-toggle-btn {
+    position: fixed;
+    top: 90px;
+    right: 20px;
+    z-index: 1000;
+    background: linear-gradient(135deg, #1C69D4, #0F4C81);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(28, 105, 212, 0.3);
+    transition: all 0.3s;
+}
+
+#code-toggle-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(28, 105, 212, 0.4);
+}
+
+pre.r {
+    display: none;
+}
+
+pre.r.show-code {
+    display: block;
+}
+</style>
+
+<button id="code-toggle-btn" onclick="toggleAllCode()">Show All Code</button>
+
+<script>
+let codeVisible = false;
+
+function toggleAllCode() {
+    const codeBlocks = document.querySelectorAll('pre.r');
+    const button = document.getElementById('code-toggle-btn');
+
+    codeVisible = !codeVisible;
+
+    codeBlocks.forEach(block => {
+        if (codeVisible) {
+            block.classList.add('show-code');
+        } else {
+            block.classList.remove('show-code');
+        }
+    });
+
+    button.textContent = codeVisible ? 'Hide All Code' : 'Show All Code';
+}
+</script>

@@ -120,53 +120,6 @@ sales_lag: Previous year’s total sales (used to compute growth)
 sales_growth_abs: Absolute growth (units sold difference)
 sales_growth_pct: % growth rate year-over-year
 
-
-```{r}
-library(plotly)
-
-p <- ggplot(bmw_yearly, aes(x = year, y = total_sales, color = region)) +
-  geom_line(size = 1) +
-  labs(
-    title = "BMW Total Yearly Sales by Region",
-    x = "Year",
-    y = "Total Sales (Units)"
-  ) +
-  theme_minimal()
-
-ggplotly(p)
-
-
-```
-```{r}
-
-library(scales)
-
-# Create top 10 models dataset
-bmw_model_global_top10 <- bmw_clean %>%
-  group_by(model) %>%
-  summarize(total_sales = sum(sales_volume)) %>%
-  arrange(desc(total_sales)) %>%
-  head(10)
-
-p <- ggplot(bmw_model_global_top10,
-            aes(x = reorder(model, total_sales), y = total_sales)) +
-  geom_col(fill = "#2C7FB8", width = 0.7) +
-  coord_flip() +
-  scale_y_continuous(labels = comma) +
-  labs(
-    title = "Top 10 BMW Models by Global Sales",
-    subtitle = "Hover to explore model sales (2010–2024)",
-    x = "Model",
-    y = "Total Sales (Units)"
-  ) +
-  theme_minimal(base_size = 13)
-
-ggplotly(p, tooltip = c("x", "y"))
-
-
-
-```
-
 `
 
 

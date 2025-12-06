@@ -13,13 +13,13 @@
 
 <title>Data Cleaning</title>
 
-<script src="Data-Cleaning_files/header-attrs-2.29/header-attrs.js"></script>
-<script src="Data-Cleaning_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="data_cleaning_rmd_files/header-attrs-2.29/header-attrs.js"></script>
+<script src="data_cleaning_rmd_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="Data-Cleaning_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
-<script src="Data-Cleaning_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
-<script src="Data-Cleaning_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
-<script src="Data-Cleaning_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<link href="data_cleaning_rmd_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="data_cleaning_rmd_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="data_cleaning_rmd_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="data_cleaning_rmd_files/bootstrap-3.3.5/shim/respond.min.js"></script>
 <style>h1 {font-size: 34px;}
        h1.title {font-size: 38px;}
        h2 {font-size: 30px;}
@@ -29,17 +29,9 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
-<script src="Data-Cleaning_files/navigation-1.1/tabsets.js"></script>
-<link href="Data-Cleaning_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
-<script src="Data-Cleaning_files/highlightjs-9.12.0/highlight.js"></script>
-<link href="Data-Cleaning_files/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
-<script src="Data-Cleaning_files/htmlwidgets-1.6.4/htmlwidgets.js"></script>
-<script src="Data-Cleaning_files/plotly-binding-4.11.0/plotly.js"></script>
-<script src="Data-Cleaning_files/typedarray-0.1/typedarray.min.js"></script>
-<link href="Data-Cleaning_files/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet" />
-<script src="Data-Cleaning_files/crosstalk-1.2.2/js/crosstalk.min.js"></script>
-<link href="Data-Cleaning_files/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="Data-Cleaning_files/plotly-main-2.11.1/plotly-latest.min.js"></script>
+<script src="data_cleaning_rmd_files/navigation-1.1/tabsets.js"></script>
+<link href="data_cleaning_rmd_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="data_cleaning_rmd_files/highlightjs-9.12.0/highlight.js"></script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -298,66 +290,6 @@ trends and growth for every region across the years.</p>
 year sales_lag: Previous year’s total sales (used to compute growth)
 sales_growth_abs: Absolute growth (units sold difference)
 sales_growth_pct: % growth rate year-over-year</p>
-<pre class="r"><code>library(plotly)</code></pre>
-<pre><code>## 
-## Attaching package: &#39;plotly&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:ggplot2&#39;:
-## 
-##     last_plot</code></pre>
-<pre><code>## The following object is masked from &#39;package:stats&#39;:
-## 
-##     filter</code></pre>
-<pre><code>## The following object is masked from &#39;package:graphics&#39;:
-## 
-##     layout</code></pre>
-<pre class="r"><code>p &lt;- ggplot(bmw_yearly, aes(x = year, y = total_sales, color = region)) +
-  geom_line(size = 1) +
-  labs(
-    title = &quot;BMW Total Yearly Sales by Region&quot;,
-    x = &quot;Year&quot;,
-    y = &quot;Total Sales (Units)&quot;
-  ) +
-  theme_minimal()</code></pre>
-<pre><code>## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
-## ℹ Please use `linewidth` instead.
-## This warning is displayed once every 8 hours.
-## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
-## generated.</code></pre>
-<pre class="r"><code>ggplotly(p)</code></pre>
-<div class="plotly html-widget html-fill-item" id="htmlwidget-9b70d60b90eec2217c2c" style="width:672px;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-9b70d60b90eec2217c2c">{"x":{"data":[{"x":[2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024],"y":[2855044,2760743,2670105,2848852,2743718,2801490,2842833,2512233,2771761,2750683,2750323,2867259,2902488,2682214,2805506],"text":["year: 2010<br />total_sales: 2855044<br />region: Africa","year: 2011<br />total_sales: 2760743<br />region: Africa","year: 2012<br />total_sales: 2670105<br />region: Africa","year: 2013<br />total_sales: 2848852<br />region: Africa","year: 2014<br />total_sales: 2743718<br />region: Africa","year: 2015<br />total_sales: 2801490<br />region: Africa","year: 2016<br />total_sales: 2842833<br />region: Africa","year: 2017<br />total_sales: 2512233<br />region: Africa","year: 2018<br />total_sales: 2771761<br />region: Africa","year: 2019<br />total_sales: 2750683<br />region: Africa","year: 2020<br />total_sales: 2750323<br />region: Africa","year: 2021<br />total_sales: 2867259<br />region: Africa","year: 2022<br />total_sales: 2902488<br />region: Africa","year: 2023<br />total_sales: 2682214<br />region: Africa","year: 2024<br />total_sales: 2805506<br />region: Africa"],"type":"scatter","mode":"lines","line":{"width":3.7795275590551185,"color":"rgba(248,118,109,1)","dash":"solid"},"hoveron":"points","name":"Africa","legendgroup":"Africa","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024],"y":[2907671,2790615,2941414,2887600,3109421,2973705,2910733,2820421,3053776,2713652,2407513,2723010,2996216,2657621,3080909],"text":["year: 2010<br />total_sales: 2907671<br />region: Asia","year: 2011<br />total_sales: 2790615<br />region: Asia","year: 2012<br />total_sales: 2941414<br />region: Asia","year: 2013<br />total_sales: 2887600<br />region: Asia","year: 2014<br />total_sales: 3109421<br />region: Asia","year: 2015<br />total_sales: 2973705<br />region: Asia","year: 2016<br />total_sales: 2910733<br />region: Asia","year: 2017<br />total_sales: 2820421<br />region: Asia","year: 2018<br />total_sales: 3053776<br />region: Asia","year: 2019<br />total_sales: 2713652<br />region: Asia","year: 2020<br />total_sales: 2407513<br />region: Asia","year: 2021<br />total_sales: 2723010<br />region: Asia","year: 2022<br />total_sales: 2996216<br />region: Asia","year: 2023<br />total_sales: 2657621<br />region: Asia","year: 2024<br />total_sales: 3080909<br />region: Asia"],"type":"scatter","mode":"lines","line":{"width":3.7795275590551185,"color":"rgba(183,159,0,1)","dash":"solid"},"hoveron":"points","name":"Asia","legendgroup":"Asia","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024],"y":[2775123,2862580,2896866,2699439,2653563,2712709,2709724,2843387,2738873,3096885,2811188,2944050,3038459,2739248,3033044],"text":["year: 2010<br />total_sales: 2775123<br />region: Europe","year: 2011<br />total_sales: 2862580<br />region: Europe","year: 2012<br />total_sales: 2896866<br />region: Europe","year: 2013<br />total_sales: 2699439<br />region: Europe","year: 2014<br />total_sales: 2653563<br />region: Europe","year: 2015<br />total_sales: 2712709<br />region: Europe","year: 2016<br />total_sales: 2709724<br />region: Europe","year: 2017<br />total_sales: 2843387<br />region: Europe","year: 2018<br />total_sales: 2738873<br />region: Europe","year: 2019<br />total_sales: 3096885<br />region: Europe","year: 2020<br />total_sales: 2811188<br />region: Europe","year: 2021<br />total_sales: 2944050<br />region: Europe","year: 2022<br />total_sales: 3038459<br />region: Europe","year: 2023<br />total_sales: 2739248<br />region: Europe","year: 2024<br />total_sales: 3033044<br />region: Europe"],"type":"scatter","mode":"lines","line":{"width":3.7795275590551185,"color":"rgba(0,186,56,1)","dash":"solid"},"hoveron":"points","name":"Europe","legendgroup":"Europe","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024],"y":[2623155,2727987,3015084,2826719,2815097,2848933,2756432,2815485,2714202,2655130,2933797,2928669,2970449,2752390,2943091],"text":["year: 2010<br />total_sales: 2623155<br />region: Middle East","year: 2011<br />total_sales: 2727987<br />region: Middle East","year: 2012<br />total_sales: 3015084<br />region: Middle East","year: 2013<br />total_sales: 2826719<br />region: Middle East","year: 2014<br />total_sales: 2815097<br />region: Middle East","year: 2015<br />total_sales: 2848933<br />region: Middle East","year: 2016<br />total_sales: 2756432<br />region: Middle East","year: 2017<br />total_sales: 2815485<br />region: Middle East","year: 2018<br />total_sales: 2714202<br />region: Middle East","year: 2019<br />total_sales: 2655130<br />region: Middle East","year: 2020<br />total_sales: 2933797<br />region: Middle East","year: 2021<br />total_sales: 2928669<br />region: Middle East","year: 2022<br />total_sales: 2970449<br />region: Middle East","year: 2023<br />total_sales: 2752390<br />region: Middle East","year: 2024<br />total_sales: 2943091<br />region: Middle East"],"type":"scatter","mode":"lines","line":{"width":3.7795275590551185,"color":"rgba(0,191,196,1)","dash":"solid"},"hoveron":"points","name":"Middle East","legendgroup":"Middle East","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024],"y":[2876099,2945731,2484980,2879917,2790461,2899713,2806945,2719052,2580481,3117538,2782286,2729395,3016152,2911604,2862275],"text":["year: 2010<br />total_sales: 2876099<br />region: North America","year: 2011<br />total_sales: 2945731<br />region: North America","year: 2012<br />total_sales: 2484980<br />region: North America","year: 2013<br />total_sales: 2879917<br />region: North America","year: 2014<br />total_sales: 2790461<br />region: North America","year: 2015<br />total_sales: 2899713<br />region: North America","year: 2016<br />total_sales: 2806945<br />region: North America","year: 2017<br />total_sales: 2719052<br />region: North America","year: 2018<br />total_sales: 2580481<br />region: North America","year: 2019<br />total_sales: 3117538<br />region: North America","year: 2020<br />total_sales: 2782286<br />region: North America","year: 2021<br />total_sales: 2729395<br />region: North America","year: 2022<br />total_sales: 3016152<br />region: North America","year: 2023<br />total_sales: 2911604<br />region: North America","year: 2024<br />total_sales: 2862275<br />region: North America"],"type":"scatter","mode":"lines","line":{"width":3.7795275590551185,"color":"rgba(97,156,255,1)","dash":"solid"},"hoveron":"points","name":"North America","legendgroup":"North America","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024],"y":[2896353,2671285,2743446,2724206,2846700,2773657,2930883,2910233,2553180,2858068,2625736,2692283,2997182,2525577,2803029],"text":["year: 2010<br />total_sales: 2896353<br />region: South America","year: 2011<br />total_sales: 2671285<br />region: South America","year: 2012<br />total_sales: 2743446<br />region: South America","year: 2013<br />total_sales: 2724206<br />region: South America","year: 2014<br />total_sales: 2846700<br />region: South America","year: 2015<br />total_sales: 2773657<br />region: South America","year: 2016<br />total_sales: 2930883<br />region: South America","year: 2017<br />total_sales: 2910233<br />region: South America","year: 2018<br />total_sales: 2553180<br />region: South America","year: 2019<br />total_sales: 2858068<br />region: South America","year: 2020<br />total_sales: 2625736<br />region: South America","year: 2021<br />total_sales: 2692283<br />region: South America","year: 2022<br />total_sales: 2997182<br />region: South America","year: 2023<br />total_sales: 2525577<br />region: South America","year: 2024<br />total_sales: 2803029<br />region: South America"],"type":"scatter","mode":"lines","line":{"width":3.7795275590551185,"color":"rgba(245,100,227,1)","dash":"solid"},"hoveron":"points","name":"South America","legendgroup":"South America","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":40.840182648401829,"r":7.3059360730593621,"b":37.260273972602747,"l":66.484018264840202},"paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"title":{"text":"BMW Total Yearly Sales by Region","font":{"color":"rgba(0,0,0,1)","family":"","size":17.534246575342465},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[2009.3,2024.7],"tickmode":"array","ticktext":["2010","2015","2020"],"tickvals":[2010,2015,2020],"categoryorder":"array","categoryarray":["2010","2015","2020"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0,"zeroline":false,"anchor":"y","title":{"text":"Year","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[2372011.75,3153039.25],"tickmode":"array","ticktext":["2400000","2600000","2800000","3000000"],"tickvals":[2400000,2600000,2800000,3000000],"categoryorder":"array","categoryarray":["2400000","2600000","2800000","3000000"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0,"zeroline":false,"anchor":"x","title":{"text":"Total Sales (Units)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","layer":"below","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.68949771689498},"title":{"text":"region","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"c99277d7351d":{"x":{},"y":{},"colour":{},"type":"scatter"}},"cur_data":"c99277d7351d","visdat":{"c99277d7351d":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
-<pre class="r"><code>library(scales)</code></pre>
-<pre><code>## 
-## Attaching package: &#39;scales&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:purrr&#39;:
-## 
-##     discard</code></pre>
-<pre><code>## The following object is masked from &#39;package:readr&#39;:
-## 
-##     col_factor</code></pre>
-<pre class="r"><code># Create top 10 models dataset
-bmw_model_global_top10 &lt;- bmw_clean %&gt;%
-  group_by(model) %&gt;%
-  summarize(total_sales = sum(sales_volume)) %&gt;%
-  arrange(desc(total_sales)) %&gt;%
-  head(10)
-
-p &lt;- ggplot(bmw_model_global_top10,
-            aes(x = reorder(model, total_sales), y = total_sales)) +
-  geom_col(fill = &quot;#2C7FB8&quot;, width = 0.7) +
-  coord_flip() +
-  scale_y_continuous(labels = comma) +
-  labs(
-    title = &quot;Top 10 BMW Models by Global Sales&quot;,
-    subtitle = &quot;Hover to explore model sales (2010–2024)&quot;,
-    x = &quot;Model&quot;,
-    y = &quot;Total Sales (Units)&quot;
-  ) +
-  theme_minimal(base_size = 13)
-
-ggplotly(p, tooltip = c(&quot;x&quot;, &quot;y&quot;))</code></pre>
-<div class="plotly html-widget html-fill-item" id="htmlwidget-610343c661ac4831ca24" style="width:672px;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-610343c661ac4831ca24">{"x":{"data":[{"orientation":"h","width":[0.69999999999999929,0.69999999999999929,0.69999999999999929,0.69999999999999929,0.69999999999999929,0.69999999999999929,0.69999999999999973,0.70000000000000018,0.70000000000000018,0.70000000000000007],"base":[0,0,0,0,0,0,0,0,0,0],"x":[23786466,23423891,23406060,23281303,23133849,23097519,22779688,22745529,22709749,22661986],"y":[10,9,8,7,6,5,4,3,2,1],"text":["reorder(model, total_sales): 7 Series<br />total_sales: 23786466","reorder(model, total_sales): i8<br />total_sales: 23423891","reorder(model, total_sales): X1<br />total_sales: 23406060","reorder(model, total_sales): 3 Series<br />total_sales: 23281303","reorder(model, total_sales): i3<br />total_sales: 23133849","reorder(model, total_sales): 5 Series<br />total_sales: 23097519","reorder(model, total_sales): M5<br />total_sales: 22779688","reorder(model, total_sales): X3<br />total_sales: 22745529","reorder(model, total_sales): X5<br />total_sales: 22709749","reorder(model, total_sales): X6<br />total_sales: 22661986"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(44,127,184,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":45.356579493565796,"r":8.6342880863428846,"b":44.034869240348698,"l":85.479452054794535},"paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":17.268576172685762},"title":{"text":"Top 10 BMW Models by Global Sales","font":{"color":"rgba(0,0,0,1)","family":"","size":20.722291407222912},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-1189323.3,24975789.300000001],"tickmode":"array","ticktext":["0","5,000,000","10,000,000","15,000,000","20,000,000"],"tickvals":[0,5000000,10000000,15000000,20000000],"categoryorder":"array","categoryarray":["0","5,000,000","10,000,000","15,000,000","20,000,000"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":4.3171440431714405,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":13.814860938148611},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0,"zeroline":false,"anchor":"y","title":{"text":"Total Sales (Units)","font":{"color":"rgba(0,0,0,1)","family":"","size":17.268576172685762}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.40000000000000002,10.6],"tickmode":"array","ticktext":["X6","X5","X3","M5","5 Series","i3","3 Series","X1","i8","7 Series"],"tickvals":[1,2,3,4,5,6.0000000000000009,7,8,9,10],"categoryorder":"array","categoryarray":["X6","X5","X3","M5","5 Series","i3","3 Series","X1","i8","7 Series"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":4.3171440431714423,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":13.814860938148611},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0,"zeroline":false,"anchor":"x","title":{"text":"Model","font":{"color":"rgba(0,0,0,1)","family":"","size":17.268576172685762}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","layer":"below","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":13.814860938148611}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"c99250a69423":{"x":{},"y":{},"type":"bar"}},"cur_data":"c99250a69423","visdat":{"c99250a69423":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 <p>`</p>
 <style>
 #code-toggle-btn {

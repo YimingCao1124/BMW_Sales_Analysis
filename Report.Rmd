@@ -1,42 +1,157 @@
 ---
-title: "REPORT"
-output: html_document
+title: "BMW Global Sales Analysis: Understanding Market Equilibrium in the Luxury Automotive Sector"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 2
 date: "2025-12-06"
 ---
 
----
-title: "Report"
-output: html_document
-date: "2025-12-06"
----
-
-**Group members:**
-
-Dianchen Li dl3836
-
-Yiming Cao yc4779
-
-Teresa Sha qs2301
-
-Yilin Cai yc4804
-
-**REPORT:**
-BMW Global Sales Analysis: Understanding Market Equilibrium in the Luxury Automotive Sector
+## Introduction
 
 The luxury automotive market shows dynamics different from conventional consumer markets. While mass-produced vehicles are subject to variations in price, features, and geographic demand, luxury brands like BMW seem to follow a logics of brand capital, configuration homogeneity, and global equilibrium. Seeking to understand whether factors such as fuel type, horsepower, price, region, or even the presence of specific product features have systematic influence on BMW's global market performance, or rather whether the established brand capital can maintain demand weakly dependent on observable features, our project aims to describe BMW's sales behavior over a 15-year period of time; uncover the structural make up of the product's portfolio; and explore whether conventional demand models and exciting product features could serve as predictors of sales variation within the luxury automotive sector.
 
 The initial impetus was sparked in class when discussing the obstacles of high-dimensional prediction and distilling market research analysis pointing to the uniform nature of BMW's global product configuration. Theoretically grounded, we expected competitive sales differences by geographic regions, price responsive demand, and killer products among BMW's produced models. As initial explorations of the data began to accumulate on the research, so did our a priori assumptions unravel. Instead of statistically uncovering product and regional competitiveness, killer products or advantageous price configurations, we experienced a uniformity in the learning outcomes signaling a necessity to rethink the competitive structures in the automotive market.
 
-Data on 50,000 BMW configurations produced between 2010-2024 – each recording the choice of model, region, transmission type, color, fuel, price, and sales – underwent a meticulous cleaning process that accounted for variations in categories, removal of NA values and lagged year-to-year sales variables to study the effect of specific features on sales. A cut-off point of 7,000 units, discerned through inspection of the configuration's sales distribution, served as high and low sales classification thresholds. Given the observed matrix of configurations, it was to serve as an indicator of potential trends underlying advantageous sales. This cut-off represented a critical starting point as it became essential for us to discipline the search for patterns among high- and low-sales vehicles.
+## Data & Methods
 
-What we found came as a uniform surprise. While yearly sales recorded predictable increases, they were stable around 16 to 18 million units, even in the face of global economic shocks (i.e., 2020). The share of the different regions – Asia, Europe, North America, Africa, South America, and the Middle East – was inclusive and close to uniform across all regions (16% to 17% share points) with no identifiable leader. While the focus was not to observe a hierarchy among configurations, one was expected to observe a competitive portfolio of killer product configurations, meaning configurations where some may cannibalize others. Instead, we discussed the existence of a maintained equilibrium set of configurations corresponding to their uniform sales without apparent higher sales of some configurations at the expense of others… it seems that BMW neither wishes for, nor actively engages with concerning the idea of, killer product configurations. Instead, it operates one on standard (or level) product architecture.
+### Data Source and Description
 
-The most pertinent outcome emerged from understanding the effects of price on uptake. Instead of the hypothesized decreases in sales with increases in price, our study found lifeless relationship between these two variables. Whether one was paying $30,000 or $100,000, the volume of sales remained unchanged. Regression analysis determined that observable features explained only 0.02% of sales variation, in effect, weak none. Neither ANOVA nor individual sample t-tests among high- and low-sales configurations could statistically demonstrate significance of sales deviations, as it only did by virtue of the number of observations, while effect sizes remained trivial. We observed 112 units among models and 49 units among fuel types. Practically speaking, trivial. This separation between statistical and practical implications or effects responded to the notion that, it seems, in a luxury segment, sales and consumer preferences do not vary because of observable product features, in turn, completely changing forces at play. It appears that luxury car brands compete on brand and identity rather than on actual product offerings.
+Our dataset contains approximately 50,000 BMW sales configurations from 2010-2024, sourced from Kaggle. Each observation records:
 
-Time-series predictions supported this notion, where 2025-2027 forecasts of the ARIMA model for each region suggested stability around a global mean with expected fluctuations around these sales. Lack of advancing sales did not suggest model deficiencies but, rather, become identifying feature pointing to the brand established equilibrium in the luxury automotive segment. Neither k-means clustering nor k-means analysis provided indicators of unique segments. While, somewhat predictably, k-means recognized the potential distinction between EV and ICE, all clusters' sales were homogenous and similar to each other. Apparently, the product configurations representing different automotive engines and design, while allowing for diversity in selection, did not enter decision processes of sales/procurement.
+- **Vehicle characteristics**: Model, transmission type, color, fuel type, horsepower
+- **Market information**: Region, price (USD), sales volume
+- **Geographic coverage**: Six global regions (Asia, Europe, North America, Africa, South America, Middle East)
+- **Time span**: 15 years of sales data (2010-2024)
 
-The gravity of our findings required contemplation of sales behavior and models different than conventional interpretation, offering such implications in sales variation. Observable product characteristics did not account for the deviation from mean while competitive structures and product considerations remain equally unprotected. Rather than some unconcluded equilibrium of processes and adjoining variables often dismissed in more fluctuating markets, core underlying variables crucial to luxury segment predictability to claim equilibrium as sales settlement, manifestly obvious, acceptable, and pervasive.
+### Data Cleaning
 
-To close out, our project provides undeniable evidence that sales among luxury automotive effects are not predicated on any predictive variables or features. Sales metrics within the luxury automotive segment approach equilibrium environments with established brand capital dominating forces of sales persuasion. Our findings signal both conceivable impacts on emergent economies with new values (i.e., sustainability) as differentiating factors, and the realization that competitors' equilibrium status may grant us further insights. Until reconsidering variables, BMW exemplifies a car brand directing and persisting in the luxury automotive equilibrium.
+Data underwent a meticulous cleaning process:
+
+1. Standardized variable names and text fields
+2. Removed NA values and inconsistent entries
+3. Created binary sales classification (high/low) using 7,000 units threshold
+4. Generated aggregated yearly summaries by region
+5. Created lagged year-to-year sales variables
+
+The 7,000-unit threshold was determined through inspection of the sales distribution and served as a critical starting point for identifying patterns among high- and low-sales vehicles.
+
+### Analytical Methods
+
+We employed multiple statistical approaches:
+
+- **Exploratory Data Analysis**: Time series visualization, regional comparisons, correlation analysis
+- **Linear Regression**: Predicting sales from product features (price, fuel type, model, etc.)
+- **ANOVA**: Testing differences between high-sales and low-sales configurations
+- **K-means Clustering**: Identifying natural groupings in vehicle configurations
+- **ARIMA Time Series Forecasting**: Projecting regional sales through 2027
+
+## Results
+
+### Market Stability and Global Balance
+
+Our findings came as a uniform surprise. While yearly sales recorded predictable increases, they remained remarkably stable around 16 to 18 million units, even in the face of global economic shocks (i.e., 2020).
+
+**Regional Distribution:**
+
+| Region | Sales Share | Average Annual Sales |
+|--------|-------------|---------------------|
+| Asia | 16-17% | 2.7-2.9M units |
+| Europe | 16-17% | 2.7-2.9M units |
+| North America | 16-17% | 2.7-2.9M units |
+| Africa | 16-17% | 2.7-2.9M units |
+| South America | 16-17% | 2.7-2.9M units |
+| Middle East | 16-17% | 2.7-2.9M units |
+
+No single region dominated the market. All six regions contributed nearly equal shares, demonstrating exceptional global balance.
+
+### Product Portfolio Equilibrium
+
+While the focus was not to observe a hierarchy among configurations, one was expected to observe a competitive portfolio of killer product configurations, meaning configurations where some may cannibalize others. Instead, we discovered the existence of a maintained equilibrium set of configurations corresponding to their uniform sales without apparent higher sales of some configurations at the expense of others. BMW neither wishes for, nor actively engages with, the idea of killer product configurations. Instead, it operates on standard (or level) product architecture.
+
+### Price-Sales Relationship
+
+The most pertinent outcome emerged from understanding the effects of price on sales. Instead of the hypothesized decreases in sales with increases in price, our study found virtually no relationship between these two variables. Whether one was paying $30,000 or $100,000, the volume of sales remained unchanged.
+
+**Statistical Results:**
+
+- **Linear Regression R² = 0.0002** (0.02% of variance explained)
+  - Statistically significant (p < 0.001) due to large sample size
+  - Practically meaningless - observable features have no predictive power
+
+- **High-Sales vs. Low-Sales Configurations:**
+  - Average price difference: $98 (only 0.13% difference)
+  - Model differences: 112 units average
+  - Fuel type differences: 49 units average
+  - All differences trivial in practical terms
+
+- **ANOVA Results:**
+  - Statistical significance achieved (p < 0.05)
+  - Effect sizes: negligible
+  - Differences only detectable due to large sample size (n = 50,000)
+
+This separation between statistical and practical significance reveals that in the luxury segment, sales and consumer preferences do not vary because of observable product features. It appears that luxury car brands compete on brand and identity rather than on actual product offerings.
+
+### Clustering and Time Series Forecasting
+
+**K-means Clustering Results:**
+
+- No unique segments identified based on vehicle characteristics
+- While k-means recognized potential distinction between EV and ICE vehicles, all clusters showed homogenous sales patterns
+- Sales volumes similar across all identified clusters
+- Product configurations (engine type, design features) did not differentiate sales performance
+
+**ARIMA Time Series Forecasting:**
+
+All regions fitted ARIMA(0,0,0) models with non-zero mean:
+
+| Region | Model | 2025-2027 Forecast | Interpretation |
+|--------|-------|-------------------|----------------|
+| All Regions | ARIMA(0,0,0) | 2.7-2.9M units/year | White noise around constant mean |
+
+- **Flat forecasts are statistically appropriate**: When data shows no trend or autocorrelation, best prediction is the historical mean
+- **Stability projections**: All regions expected to maintain 2.7-2.9M units annually through 2027
+- **Wide prediction intervals**: Reflect year-to-year volatility, not trend uncertainty
+- Lack of advancing sales is not a model deficiency but an identifying feature of brand-established equilibrium
+
+Apparently, product configurations representing different automotive engines and design, while allowing for diversity in selection, did not enter decision processes of sales/procurement.
+
+## Discussion
+
+### Rethinking Luxury Market Dynamics
+
+The gravity of our findings required contemplation of sales behavior and models different than conventional interpretation. Observable product characteristics did not account for deviation from mean sales, while competitive structures and product considerations remain equally unaffected by traditional market forces.
+
+Rather than the unconcluded equilibrium of processes and variables often dismissed in more fluctuating markets, the luxury automotive segment demonstrates core underlying dynamics where brand capital claims equilibrium as the sales settlement—manifestly obvious, acceptable, and pervasive.
+
+### Implications
+
+Our findings reveal several key insights:
+
+1. **Brand Capital Dominates**: In the luxury segment, established brand equity overwhelms traditional price-demand relationships
+2. **Product Features Are Secondary**: Observable vehicle characteristics (price, fuel type, model) have negligible influence on sales
+3. **Global Equilibrium Strategy**: BMW maintains balanced distribution across all regions and product lines
+4. **Statistical vs. Practical Significance**: Large datasets can show statistical significance while effect sizes remain trivial
+
+### Limitations
+
+- Dataset limited to BMW; findings may not generalize to all luxury brands
+- External factors (marketing spend, dealer networks) not included in analysis
+- Configuration-level data may obscure brand-level strategies
+- Time period (2010-2024) may not capture longer-term trends
+
+### Future Directions
+
+- Compare BMW's equilibrium strategy with competitors (Mercedes-Benz, Audi)
+- Examine emerging values (sustainability, electrification) as potential differentiating factors
+- Investigate whether equilibrium status persists in new market segments
+- Explore marketing and brand perception variables beyond product features
+
+## Conclusion
+
+Our project provides compelling evidence that sales in the luxury automotive segment are not predicated on conventional predictive variables or product features. Sales metrics within BMW's portfolio approach equilibrium environments with established brand capital dominating forces of sales persuasion.
+
+BMW exemplifies a luxury car brand directing and persisting in market equilibrium—competing on brand and identity rather than on product differentiation. This challenges conventional demand models and highlights the unique dynamics of luxury markets where brand capital, not product characteristics, drives consumer choice.
 
 
